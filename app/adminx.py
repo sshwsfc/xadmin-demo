@@ -132,3 +132,15 @@ class KitchenSinkAdmin(object):
 
 xadmin.site.register(KitchenSink, KitchenSinkAdmin)
 
+# Override auth admins
+from django.contrib.auth.models import User
+from xadmin.plugins.auth import UserAdmin
+
+class DemoUserAdmin(UserAdmin):
+    def save_models(self):
+        pass
+    def delete_model(self):
+        pass
+
+xadmin.site.unregister(User)
+xadmin.site.register(User, DemoUserAdmin)
