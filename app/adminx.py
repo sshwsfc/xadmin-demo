@@ -20,7 +20,7 @@ class ContinentAdmin(object):
     search_fields = ('name',)
     list_display = ('name',)
     inlines = (CountryInline,)
-
+    model_icon = 'globe'
 
 xadmin.site.register(Continent, ContinentAdmin)
 
@@ -36,6 +36,7 @@ class CountryAdmin(object):
     list_filter = ('continent',)
 
     inlines = (CityInline,)
+    model_icon = 'flag'
 
     form_layout = (
         TabHolder(
@@ -88,7 +89,7 @@ class KitchenSinkAdmin(object):
     list_filter = ('choices', 'date', 'country')
     readonly_fields = ('readonly_field',)
     raw_id_fields = ('raw_id_field',)
-    
+    model_icon = 'briefcase'
     form_layout = (
         Main(
             Fieldset(None,

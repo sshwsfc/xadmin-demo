@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'reversion',
     
     'app',
+    'hosts',
 )
 
 DATE_FORMAT = 'Y-m-d'
