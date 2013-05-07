@@ -135,7 +135,7 @@ xadmin.site.register(KitchenSink, KitchenSinkAdmin)
 
 # Override auth admins
 from django.contrib.auth.models import User
-from xadmin.plugins.auth import UserAdmin
+from xadmin.plugins.auth import UserAdmin, AdminPasswordChangeForm, PasswordChangeForm, ChangePasswordView, ChangeAccountPasswordView
 
 class DemoUserAdmin(UserAdmin):
     def save_models(self):
@@ -145,6 +145,15 @@ class DemoUserAdmin(UserAdmin):
 
 xadmin.site.unregister(User)
 xadmin.site.register(User, DemoUserAdmin)
+
+class UnAdminPasswordChangeForm(AdminPasswordChangeForm):
+    def save(self, commit=True):
+        pass
+class UnPasswordChangeForm(PasswordChangeForm):
+    def save(self, commit=True):
+        pass
+xadmin.site.register(ChangePasswordView, change_password_form=UnAdminPasswordChangeForm)
+xadmin.site.register(ChangeAccountPasswordView, change_password_form=UnPasswordChangeForm)
 
 # Rewrite login view
 xadmin.site.register(views.LoginView,
