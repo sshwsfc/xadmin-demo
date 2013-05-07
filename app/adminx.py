@@ -138,6 +138,7 @@ from django.contrib.auth.models import User
 from xadmin.plugins.auth import UserAdmin, AdminPasswordChangeForm, PasswordChangeForm, ChangePasswordView, ChangeAccountPasswordView
 
 class DemoUserAdmin(UserAdmin):
+    actions = None
     def save_models(self):
         pass
     def delete_model(self):
