@@ -1,6 +1,6 @@
 # Django settings for wictrl project.
 
-import sys
+import sys, os
 import os.path
 
 reload(sys)
@@ -27,11 +27,27 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
-try:
-    import dj_database_url
-    DATABASES['default'] =  dj_database_url.config()
-except Exception:
-    pass
+ENABLE_XADMIN_THEME = False
+
+if os.environ.get('DATABASE_URL', None):
+    ENABLE_XADMIN_THEME = True
+    try:
+        import dj_database_url
+        DATABASES['default'] =  dj_database_url.config()
+    except Exception:
+        pass
+
+if os.environ.get('OPENSHIFT_MYSQL_DB_HOST', None):
+    ENABLE_XADMIN_THEME = True
+    DATABASES['default'] =  {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'xadmin',
+        'USER': 'adminXPZrDWa',
+        'PASSWORD': 'iNqtiuTuq2YM',
+        'HOST': os.environ.get('OPENSHIFT_MYSQL_DB_HOST'),
+        'PORT': os.environ.get('OPENSHIFT_MYSQL_DB_PORT')
+    }
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.

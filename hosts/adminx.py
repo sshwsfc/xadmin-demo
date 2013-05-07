@@ -1,3 +1,4 @@
+from django.conf import settings
 import xadmin
 from xadmin import views
 from models import *
@@ -21,7 +22,7 @@ class MainDashboard(object):
 xadmin.site.register(views.website.IndexView, MainDashboard)
 
 class BaseSetting(object):
-    enable_themes = True
+    enable_themes = getattr(settings, 'ENABLE_XADMIN_THEME', False)
     use_bootswatch = True
 xadmin.site.register(views.BaseAdminView, BaseSetting)
 
