@@ -144,3 +144,8 @@ class DemoUserAdmin(UserAdmin):
 
 xadmin.site.unregister(User)
 xadmin.site.register(User, DemoUserAdmin)
+
+# Rewrite login view
+xadmin.site.register(views.LoginView,
+    login_template="xadmin/views/demo_login.html"
+    )

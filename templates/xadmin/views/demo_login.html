@@ -1,0 +1,20 @@
+{% extends "xadmin/views/login.html" %}
+{% load i18n xadmin_tags %}
+
+{% block extrastyle %}{{ block.super }}
+<style type="text/css">
+  .form-signin {
+    -webkit-border-radius: 10px;
+       -moz-border-radius: 10px;
+            border-radius: 10px;
+    -webkit-box-shadow: 0 0px 40px rgba(0,0,0,.2);
+       -moz-box-shadow: 0 0px 40px rgba(0,0,0,.2);
+            box-shadow: 0 0px 40px rgba(0,0,0,.2);
+  }
+</style>
+{% endblock %}
+
+{% block login_heading %}
+<h2 class="form-signin-heading"><i class="icon-heart"></i> {% trans "You will love it" %}</h2>
+<p class="text-success" style="margin-bottom: 20px;">{% trans "Login with" %} <b>admin/admin</b></p>
+{% endblock %}
