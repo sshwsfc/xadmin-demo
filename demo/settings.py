@@ -101,7 +101,7 @@ MEDIA_URL = ''
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 if ON_OPENSHIFT:
-    STATIC_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', ''), 'static')
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'wsgi', 'static')
 elif ON_HEROKU:
     STATIC_ROOT = os.path.join(PROJECT_ROOT, '..', 'static')
 else:
