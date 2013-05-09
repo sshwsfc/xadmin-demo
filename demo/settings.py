@@ -18,7 +18,7 @@ if os.environ.has_key('DATABASE_URL'):
 PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)), os.pardir)
 
 if ON_OPENSHIFT or ON_HEROKU:
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
 
