@@ -45,8 +45,8 @@ if ON_OPENSHIFT:
     DATABASES['default'] =  {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'xadmin',
-        'USER': 'adminXPZrDWa',
-        'PASSWORD': 'iNqtiuTuq2YM',
+        'USER': os.environ['OPENSHIFT_MYSQL_DB_USERNAME'],
+        'PASSWORD': os.environ['OPENSHIFT_MYSQL_DB_PASSWORD'],
         'HOST': os.environ['OPENSHIFT_MYSQL_DB_HOST'],
         'PORT': os.environ['OPENSHIFT_MYSQL_DB_PORT'],
     }
@@ -131,7 +131,7 @@ default_keys = { 'SECRET_KEY': 'vm4rl5*ymb@2&d_(gc$gb-^twq9w(u69hi--%$5xrh!xk(t%
 
 # Replace default keys with dynamic values if we are in OpenShift
 use_keys = default_keys
-if ON_OPENSHIFT:
+if ON_OPENSHIFT and False:
     imp.find_module('openshiftlibs')
     import openshiftlibs
     use_keys = openshiftlibs.openshift_secure(default_keys)
