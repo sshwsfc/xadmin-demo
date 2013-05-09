@@ -44,9 +44,9 @@ DATABASES = {
 if ON_OPENSHIFT:
     DATABASES['default'] =  {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': os.environ['OPENSHIFT_APP_NAME'],
-        'USER': os.environ['OPENSHIFT_DB_USERNAME'],
-        'PASSWORD': os.environ['OPENSHIFT_DB_PASSWORD'],
+        'NAME': 'xadmin',
+        'USER': 'adminXPZrDWa',
+        'PASSWORD': 'iNqtiuTuq2YM',
         'HOST': os.environ['OPENSHIFT_DB_HOST'],
         'PORT': os.environ['OPENSHIFT_DB_PORT'],
     }
