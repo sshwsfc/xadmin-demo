@@ -1,14 +1,27 @@
 # Django settings for wictrl project.
 
-import sys, os
+import sys, os, imp
 import os.path
 
 reload(sys)
 sys.setdefaultencoding('utf-8') 
 
+# a setting to determine whether we are running on OpenShift and Heroku
+ON_OPENSHIFT = False
+if os.environ.has_key('OPENSHIFT_REPO_DIR'):
+    ON_OPENSHIFT = True
+
+ON_HEROKU = False
+if os.environ.has_key('DATABASE_URL'):
+    ON_HEROKU = True
+
 PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)), os.pardir)
 
-DEBUG = True
+if ON_OPENSHIFT or ON_HEROKU:
+    DEBUG = False
+else:
+    DEBUG = True
+
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -27,26 +40,24 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
-ENABLE_XADMIN_THEME = False
 
-if os.environ.get('DATABASE_URL', None):
-    ENABLE_XADMIN_THEME = True
+if ON_OPENSHIFT:
+    DATABASES['default'] =  {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': os.environ['OPENSHIFT_APP_NAME'],
+        'USER': os.environ['OPENSHIFT_DB_USERNAME'],
+        'PASSWORD': os.environ['OPENSHIFT_DB_PASSWORD'],
+        'HOST': os.environ['OPENSHIFT_DB_HOST'],
+        'PORT': os.environ['OPENSHIFT_DB_PORT'],
+    }
+elif ON_HEROKU:
     try:
         import dj_database_url
         DATABASES['default'] =  dj_database_url.config()
     except Exception:
         pass
 
-if os.environ.get('OPENSHIFT_MYSQL_DB_HOST', None):
-    ENABLE_XADMIN_THEME = True
-    DATABASES['default'] =  {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'xadmin',
-        'USER': 'adminXPZrDWa',
-        'PASSWORD': 'iNqtiuTuq2YM',
-        'HOST': os.environ.get('OPENSHIFT_MYSQL_DB_HOST'),
-        'PORT': os.environ.get('OPENSHIFT_MYSQL_DB_PORT')
-    }
+ENABLE_XADMIN_THEME = ON_OPENSHIFT or ON_HEROKU
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -73,7 +84,12 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+if ON_OPENSHIFT:
+    MEDIA_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', ''), 'media')
+elif ON_HEROKU:
+    MEDIA_ROOT = os.path.join(PROJECT_ROOT, '..', 'media')
+else:
+    MEDIA_ROOT = ''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -84,7 +100,12 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '/var/www/static/'
+if ON_OPENSHIFT:
+    STATIC_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', ''), 'static')
+elif ON_HEROKU:
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, '..', 'static')
+else:
+    STATIC_ROOT = '/var/www/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -106,7 +127,17 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '5=!nss_+^nvyyc_j(tdcf!7(_una*3gtw+_8v5jaa=)j0g^d_2'
+default_keys = { 'SECRET_KEY': 'vm4rl5*ymb@2&d_(gc$gb-^twq9w(u69hi--%$5xrh!xk(t%hw' }
+
+# Replace default keys with dynamic values if we are in OpenShift
+use_keys = default_keys
+if ON_OPENSHIFT:
+    imp.find_module('openshiftlibs')
+    import openshiftlibs
+    use_keys = openshiftlibs.openshift_secure(default_keys)
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = use_keys['SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

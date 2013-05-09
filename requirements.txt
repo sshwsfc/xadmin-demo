@@ -1,8 +1,4 @@
-django>=1.5
-xlwt
-django-crispy-forms>=1.2.3
-django-reversion
+git+git://github.com/sshwsfc/django-xadmin.git
 django-mptt
 psycopg2==2.4.5
 dj-database-url==0.2.0
-git+git://github.com/sshwsfc/django-xadmin.git
