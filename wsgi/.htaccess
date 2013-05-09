@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^static/(.+)$ /static/$1 [L]
+RewriteRule ^application/static/(.+)$ /static/$1 [L]
