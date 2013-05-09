@@ -47,8 +47,8 @@ if ON_OPENSHIFT:
         'NAME': 'xadmin',
         'USER': 'adminXPZrDWa',
         'PASSWORD': 'iNqtiuTuq2YM',
-        'HOST': os.environ['OPENSHIFT_DB_HOST'],
-        'PORT': os.environ['OPENSHIFT_DB_PORT'],
+        'HOST': os.environ['OPENSHIFT_MYSQL_DB_HOST'],
+        'PORT': os.environ['OPENSHIFT_MYSQL_DB_PORT'],
     }
 elif ON_HEROKU:
     try:
