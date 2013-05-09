@@ -1,6 +1,6 @@
 # Django settings for wictrl project.
 
-import sys, os, imp
+import sys, os
 import os.path
 
 reload(sys)
@@ -18,7 +18,7 @@ if os.environ.has_key('DATABASE_URL'):
 PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)), os.pardir)
 
 if ON_OPENSHIFT or ON_HEROKU:
-    DEBUG = True
+    DEBUG = False
 else:
     DEBUG = True
 
@@ -131,8 +131,7 @@ default_keys = { 'SECRET_KEY': 'vm4rl5*ymb@2&d_(gc$gb-^twq9w(u69hi--%$5xrh!xk(t%
 
 # Replace default keys with dynamic values if we are in OpenShift
 use_keys = default_keys
-if ON_OPENSHIFT and False:
-    imp.find_module('openshiftlibs')
+if ON_OPENSHIFT:
     import openshiftlibs
     use_keys = openshiftlibs.openshift_secure(default_keys)
 
