@@ -15,3 +15,6 @@ python ${OPENSHIFT_REPO_DIR}manage.py syncdb --noinput
 
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py collectstatic --noinput'"
 python ${OPENSHIFT_REPO_DIR}manage.py collectstatic --noinput
+
+echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py loaddata data.json'"
+python ${OPENSHIFT_REPO_DIR}manage.py loaddata ${OPENSHIFT_REPO_DIR}data.json
