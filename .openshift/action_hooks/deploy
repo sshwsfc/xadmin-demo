@@ -4,11 +4,11 @@
 # up again.  This script gets executed directly, so it could be python, php,
 # ruby, etc.
 
-source ${OPENSHIFT_APP_DIR}virtenv/bin/activate
-export PYTHON_EGG_CACHE=${OPENSHIFT_APP_DIR}virtenv/lib/python2.7/site-packages
+cartridge_type="python-2.7"
+source $OPENSHIFT_HOMEDIR/$cartridge_type/virtenv/bin/activate
 
 echo "Install & Update Django Xadmin form source"
-pip install --upgrade git+git://github.com/sshwsfc/django-xadmin.git
+#pip install --upgrade git+git://github.com/sshwsfc/django-xadmin.git
 
 echo "Executing 'python ${OPENSHIFT_REPO_DIR}manage.py syncdb --noinput'"
 python ${OPENSHIFT_REPO_DIR}manage.py syncdb --noinput
