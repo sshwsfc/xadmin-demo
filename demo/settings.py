@@ -1,6 +1,6 @@
 # Django settings for wictrl project.
 
-import sys, os, imp
+import sys, os
 import os.path
 
 reload(sys)
@@ -44,11 +44,11 @@ DATABASES = {
 if ON_OPENSHIFT:
     DATABASES['default'] =  {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': os.environ['OPENSHIFT_APP_NAME'],
-        'USER': os.environ['OPENSHIFT_DB_USERNAME'],
-        'PASSWORD': os.environ['OPENSHIFT_DB_PASSWORD'],
-        'HOST': os.environ['OPENSHIFT_DB_HOST'],
-        'PORT': os.environ['OPENSHIFT_DB_PORT'],
+        'NAME': 'xadmin',
+        'USER': os.environ['OPENSHIFT_MYSQL_DB_USERNAME'],
+        'PASSWORD': os.environ['OPENSHIFT_MYSQL_DB_PASSWORD'],
+        'HOST': os.environ['OPENSHIFT_MYSQL_DB_HOST'],
+        'PORT': os.environ['OPENSHIFT_MYSQL_DB_PORT'],
     }
 elif ON_HEROKU:
     try:
@@ -132,7 +132,6 @@ default_keys = { 'SECRET_KEY': 'vm4rl5*ymb@2&d_(gc$gb-^twq9w(u69hi--%$5xrh!xk(t%
 # Replace default keys with dynamic values if we are in OpenShift
 use_keys = default_keys
 if ON_OPENSHIFT:
-    imp.find_module('openshiftlibs')
     import openshiftlibs
     use_keys = openshiftlibs.openshift_secure(default_keys)
 

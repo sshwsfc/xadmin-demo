@@ -9,5 +9,5 @@ setup(
     author='TM',
     author_email='sshwsfc@gmail.com',
     url='http://github.com/sshwsfc/xadmin-demo',
-    install_requires=['greenlet', 'gevent', 'MySQL-python'],
+    install_requires=['greenlet', 'gevent', 'MySQL-python', 'django-mptt'],
 )

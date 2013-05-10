@@ -1,5 +1,3 @@
-.*
 *.pyc
 data.db
-!.gitignore
-!.openshift
+.DS_Store
