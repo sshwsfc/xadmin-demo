@@ -3,6 +3,7 @@ import xadmin
 from xadmin import views
 from models import *
 from xadmin.layout import *
+from xadmin.util import static
 
 from xadmin.plugins.inline import Inline
 from xadmin.plugins.batch import BatchChangeAction
@@ -21,9 +22,11 @@ class MainDashboard(object):
     ]
 xadmin.site.register(views.website.IndexView, MainDashboard)
 
+THEMES = ['Amelia', 'Cerulean', 'Cosmo', 'Cyborg', 'Journal', 'Readable', 'Simplex', 'Slate', 'Spacelab', 'Spruce', 'Superhero', 'United']
+
 class BaseSetting(object):
-    enable_themes = getattr(settings, 'ENABLE_XADMIN_THEME', False)
-    use_bootswatch = True
+    enable_themes = True
+    user_themes = [{'name': name, 'description': name, 'css': static('xdemo/bootswatch/%s/bootstrap.min.css' % name.lower())} for name in THEMES]
 xadmin.site.register(views.BaseAdminView, BaseSetting)
 
 class GolbeSetting(object):
