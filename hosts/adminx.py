@@ -16,7 +16,9 @@ class MainDashboard(object):
             {"type": "list", "model": "hosts.host", 'params': {'o':'-guarantee_date'}},
         ],
         [
-            {"type": "qbutton", "title": "Quick Start", "btns": [{'model': Host}, {'model':IDC}, {'title': "Google", 'url': "http://www.google.com"}]},
+            {"type": "qbutton", "title": "Quick Start", "btns": [{'model': Host}, {'model':IDC}, 
+                {'title': "Github", 'url': "https://github.com/sshwsfc/django-xadmin", 'icon': 'github'},
+                {'title': "Help Translate", 'url': "http://trans.xadmin.io", 'icon': 'flag'}]},
             {"type": "addform", "model": MaintainLog},
         ]
     ]
