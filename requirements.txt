@@ -1,4 +1,4 @@
-git+git://github.com/sshwsfc/django-xadmin.git
+https://github.com/sshwsfc/django-xadmin/archive/bp3.zip
 django-mptt
 psycopg2==2.4.5
 dj-database-url==0.2.0
