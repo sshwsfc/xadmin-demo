@@ -1,0 +1,3 @@
+[submodule "django-xadmin"]
+	path = django-xadmin
+	url = git@github.com:sshwsfc/django-xadmin.git
