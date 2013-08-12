@@ -67,8 +67,16 @@ class HostAdmin(object):
     open_web.allow_tags = True
     open_web.is_column = True
 
-    list_display = ('name', 'idc', 'guarantee_date', 'service_type', 'status', 'open_web', 'description')
+    def thumbnail_img(self, obj):
+        return "<img src='http://js.wiyun.com/site_media/images/wallpaper/eac1bce7-90d5-40a7-a7e2-ae02acca2e86_jpg_152x102_crop_upscale_q85.jpg'/>"
+    thumbnail_img.short_description = "TImg"
+    thumbnail_img.allow_tags = True
+    thumbnail_img.is_column = True
+    thumbnail_img.thumbnail_img = True
+
+    list_display = ('thumbnail_img', 'name', 'idc', 'guarantee_date', 'service_type', 'status', 'open_web', 'description')
     list_display_links = ('name',)
+    grid_layouts = ['thumbnails', 'table']
 
     raw_id_fields = ('idc',)
     style_fields = {'system': "radio-inline"}
@@ -82,7 +90,7 @@ class HostAdmin(object):
     list_editable = ('name', 'idc', 'guarantee_date', 'service_type', 'description')
     save_as = True
     
-    aggregate_fields = {"guarantee_date": "min"}
+    #aggregate_fields = {"guarantee_date": "min"}
 
     form_layout = (
         Main(
