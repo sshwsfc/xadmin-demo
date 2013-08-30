@@ -6,6 +6,8 @@ import os.path
 reload(sys)
 sys.setdefaultencoding('utf-8') 
 
+PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)), os.pardir)
+
 # a setting to determine whether we are running on OpenShift and Heroku
 ON_OPENSHIFT = False
 if os.environ.has_key('OPENSHIFT_REPO_DIR'):
@@ -14,8 +16,7 @@ if os.environ.has_key('OPENSHIFT_REPO_DIR'):
 ON_HEROKU = False
 if os.environ.has_key('DATABASE_URL'):
     ON_HEROKU = True
-
-PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)), os.pardir)
+    sys.path.insert(0, os.path.join(PROJECT_ROOT, 'django-xadmin'))
 
 if ON_OPENSHIFT or ON_HEROKU:
     DEBUG = True
@@ -180,7 +181,7 @@ INSTALLED_APPS = (
     'reversion',
     
     'app',
-    'hosts',
+    'host',
 )
 
 DATE_FORMAT = 'Y-m-d'
