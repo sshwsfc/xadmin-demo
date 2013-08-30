@@ -57,7 +57,7 @@ class IDCAdmin(object):
     reversion_enable = True
 
     actions = [BatchChangeAction,]
-    batch_fields = ('contact', 'create_time')
+    batch_fields = ('contact', )
     
 class HostAdmin(object):
     def open_web(self, instance):
@@ -82,6 +82,9 @@ class HostAdmin(object):
     save_as = True
     
     aggregate_fields = {"guarantee_date": "min"}
+
+    actions = [BatchChangeAction,]
+    batch_fields = ('name', 'idc', 'guarantee_date', 'service_type', 'status', 'description', 'system')
 
     form_layout = (
         Main(
