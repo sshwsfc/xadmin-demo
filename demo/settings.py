@@ -8,6 +8,8 @@ sys.setdefaultencoding('utf-8')
 
 PROJECT_ROOT = os.path.join(os.path.realpath(os.path.dirname(__file__)), os.pardir)
 
+gettext_noop = lambda s: s
+
 # a setting to determine whether we are running on OpenShift and Heroku
 ON_OPENSHIFT = False
 if os.environ.has_key('OPENSHIFT_REPO_DIR'):
@@ -68,7 +70,19 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
+
+LANGUAGES = (
+    ('de', gettext_noop('German')),
+    ('en', gettext_noop('English')),
+    ('ja', gettext_noop('Japanese')),
+    ('lt', gettext_noop('Lithuanian')),
+    ('nl', gettext_noop('Dutch')),
+    ('pl', gettext_noop('Polish')),
+    ('pt', gettext_noop('Portuguese')),
+    ('zh-cn', gettext_noop('Simplified Chinese')),
+)
 
 SITE_ID = 1
 
@@ -151,6 +165,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:

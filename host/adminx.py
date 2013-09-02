@@ -33,6 +33,7 @@ class BaseSetting(object):
 xadmin.site.register(views.BaseAdminView, BaseSetting)
 
 class GolbeSetting(object):
+    menu_style = 'accordion'
     globe_search_models = [Host, IDC]
     globe_models_icon = {
         Host: 'laptop', IDC: 'cloud'
