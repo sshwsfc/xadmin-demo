@@ -8,6 +8,8 @@ from xadmin.util import static
 from xadmin.plugins.inline import Inline
 from xadmin.plugins.batch import BatchChangeAction
 
+from django.contrib.comments.models import Comment
+
 class MainDashboard(object):
     widgets = [
         [
@@ -61,6 +63,13 @@ class IDCAdmin(object):
     actions = [BatchChangeAction,]
     batch_fields = ('contact', )
     
+class CommentInline(object):
+    generic_inline = True
+    ct_fk_field = "object_pk"
+    model = Comment
+    extra = 1
+    style = 'tab'
+
 class HostAdmin(object):
     def open_web(self, instance):
         return "<a href='http://%s' target='_blank'>Open</a>" % instance.ip
@@ -115,6 +124,9 @@ class HostAdmin(object):
                         'guarantee_date'
                     ),
                 ),
+                Tab('Comments',
+                    Inline(Comment),
+                ),
             ),
         ),
         Side(
@@ -123,7 +135,7 @@ class HostAdmin(object):
             ),
         )
     )
-    inlines = [MaintainInline]
+    inlines = [MaintainInline, CommentInline]
     reversion_enable = True
     
 class HostGroupAdmin(object):
