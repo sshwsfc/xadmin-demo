@@ -8,5 +8,6 @@ from xadmin.plugins import xversion
 xversion.registe_models()
 
 urlpatterns = patterns('',
+    url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'', include(xadmin.site.urls)),
 )
