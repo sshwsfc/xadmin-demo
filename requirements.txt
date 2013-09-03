@@ -1,6 +1,5 @@
-django>=1.4
+http://github.com/sshwsfc/django-xadmin/archive/master.zip
 xlwt
-django-crispy-forms>=1.2.3
 django-reversion
 django-mptt
 psycopg2==2.4.5

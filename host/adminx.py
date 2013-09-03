@@ -33,6 +33,7 @@ class BaseSetting(object):
 xadmin.site.register(views.BaseAdminView, BaseSetting)
 
 class GolbeSetting(object):
+    menu_style = 'accordion'
     globe_search_models = [Host, IDC]
     globe_models_icon = {
         Host: 'laptop', IDC: 'cloud'
@@ -58,7 +59,7 @@ class IDCAdmin(object):
     reversion_enable = True
 
     actions = [BatchChangeAction,]
-    batch_fields = ('contact', 'create_time')
+    batch_fields = ('contact', )
     
 class HostAdmin(object):
     def open_web(self, instance):
@@ -91,6 +92,9 @@ class HostAdmin(object):
     save_as = True
     
     #aggregate_fields = {"guarantee_date": "min"}
+    
+    actions = [BatchChangeAction,]
+    batch_fields = ('name', 'idc', 'guarantee_date', 'service_type', 'status', 'description', 'system')
 
     form_layout = (
         Main(
