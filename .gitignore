@@ -1,3 +1,4 @@
 *.pyc
 data.db
 .DS_Store
+media/
