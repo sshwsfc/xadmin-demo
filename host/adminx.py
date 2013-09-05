@@ -1,46 +1,12 @@
 from django.conf import settings
 import xadmin
-from xadmin import views
 from models import *
 from xadmin.layout import *
-from xadmin.util import static
 
 from xadmin.plugins.inline import Inline
 from xadmin.plugins.batch import BatchChangeAction
 
 from django.contrib.comments.models import Comment
-
-class MainDashboard(object):
-    widgets = [
-        [
-            {"type": "html", "title": "Test Widget", "content": "<h3> Welcome to Xadmin! </h3><p>Github: <a href='https://github.com/sshwsfc/django-xadmin' target='_blank'>https://github.com/sshwsfc/django-xadmin</a></p><p>Join Online Group: <br/>QQ Qun : 282936295</p>"},
-            {"type": "chart", "model": "host.accessrecord", 'chart': 'user_count', 'params': {'_p_date__gte': '2013-01-08', 'p': 1, '_p_date__lt': '2013-01-29'}},
-            {"type": "list", "model": "host.host", 'params': {'o':'-guarantee_date'}},
-        ],
-        [
-            {"type": "qbutton", "title": "Quick Start", "btns": [{'model': Host}, {'model':IDC}, 
-                {'title': "Github", 'url': "https://github.com/sshwsfc/django-xadmin", 'icon': 'github'},
-                {'title': "Help Translate", 'url': "http://trans.xadmin.io", 'icon': 'flag'}]},
-            {"type": "addform", "model": MaintainLog},
-        ]
-    ]
-xadmin.site.register(views.website.IndexView, MainDashboard)
-
-THEMES = ['Amelia', 'Cerulean', 'Cosmo', 'Cyborg', 'Flatly', 'Journal', 'Readable', 'Simplex', 'Slate', 'Spacelab', 'Spruce', 'Superhero', 'United']
-
-class BaseSetting(object):
-    enable_themes = True
-    use_bootswatch = True
-    #user_themes = [{'name': name, 'description': name, 'css': static('xdemo/bootswatch/%s/bootstrap.min.css' % name.lower())} for name in THEMES]
-xadmin.site.register(views.BaseAdminView, BaseSetting)
-
-class GolbeSetting(object):
-    menu_style = 'accordion'
-    globe_search_models = [Host, IDC]
-    globe_models_icon = {
-        Host: 'laptop', IDC: 'cloud'
-    }
-xadmin.site.register(views.CommAdminView, GolbeSetting)
 
 class MaintainInline(object):
     model = MaintainLog
@@ -195,6 +161,5 @@ class AccessRecordAdmin(object):
 xadmin.site.register(Host, HostAdmin)
 xadmin.site.register(HostGroup, HostGroupAdmin)
 xadmin.site.register(MaintainLog, MaintainLogAdmin)
-print 'xxx'
 xadmin.site.register(IDC, IDCAdmin)
 xadmin.site.register(AccessRecord, AccessRecordAdmin)

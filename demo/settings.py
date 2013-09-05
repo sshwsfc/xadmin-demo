@@ -174,6 +174,9 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'demo.urls'
 
+XADMIN_CONF = 'demo.xsite'
+#XADMIN_EXCLUDE_PLUGINS = ('bookmark', 'comments')
+
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'demo.wsgi.application'
 
