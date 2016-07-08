@@ -62,6 +62,8 @@ elif ON_HEROKU:
 
 ENABLE_XADMIN_THEME = ON_OPENSHIFT or ON_HEROKU
 
+ALLOWED_HOSTS = '*'
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -72,7 +74,6 @@ TIME_ZONE = 'America/Chicago'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en'
 
-
 LANGUAGES = (
     ('de', gettext_noop('German')),
     ('en', gettext_noop('English')),
@@ -81,7 +82,7 @@ LANGUAGES = (
     ('nl', gettext_noop('Dutch')),
     ('pl', gettext_noop('Polish')),
     ('pt', gettext_noop('Portuguese')),
-    ('zh-cn', gettext_noop('Simplified Chinese')),
+    ('zh-hans', gettext_noop('Simplified Chinese')),
 )
 
 SITE_ID = 1
@@ -195,7 +196,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'django.contrib.sites',
-    'django.contrib.comments',
+    'django_comments',
 
     'xadmin',
     'crispy_forms',
@@ -205,9 +206,6 @@ INSTALLED_APPS = (
     'host',
 )
 
-DATE_FORMAT = 'Y-m-d'
-DATETIME_FORMAT = 'Y-m-d H:i'
-TIME_FORMAT = 'H:i'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

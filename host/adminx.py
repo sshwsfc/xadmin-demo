@@ -6,7 +6,7 @@ from xadmin.layout import *
 from xadmin.plugins.inline import Inline
 from xadmin.plugins.batch import BatchChangeAction
 
-from django.contrib.comments.models import Comment
+from django_comments.models import Comment
 
 class MaintainInline(object):
     model = MaintainLog

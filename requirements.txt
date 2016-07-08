@@ -1,5 +1,6 @@
 http://github.com/sshwsfc/django-xadmin/archive/master.zip
 xlwt
+django-contrib-comments
 django-reversion
 django-mptt
 psycopg2==2.4.5
